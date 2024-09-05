@@ -1,0 +1,23 @@
+@startuml
+actor Cliente
+actor Agente
+
+usecase UC01 as "Cadastrar usuário"
+usecase UC02 as "Introduzir pedido de aluguel"
+usecase UC03 as "Modificar pedido de aluguel"
+usecase UC04 as "Consultar pedido de aluguel"
+usecase UC05 as "Cancelar pedido de aluguel"
+usecase UC06 as "Avaliar pedido de aluguel"
+usecase UC07 as "Modificar pedido de aluguel (Agente)"
+usecase UC08 as "Executar contrato"
+
+Cliente --> UC01
+Cliente --> UC02
+Cliente --> UC03
+Cliente --> UC04
+Cliente --> UC05
+Agente --> UC06
+Agente --> UC07
+Agente --> UC08
+
+@enduml
