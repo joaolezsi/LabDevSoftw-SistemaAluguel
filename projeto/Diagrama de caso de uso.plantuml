@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+
+actor Cliente
+actor Agente
+actor SistemaBancario as "Sistema Bancário"
+actor SistemaWeb as "Sistema Web"
+
+usecase CriarPedido as "Criar Pedido de Aluguel"
+usecase ModificarPedido as "Modificar Pedido de Aluguel"
+usecase ConsultarPedido as "Consultar Pedido de Aluguel"
+usecase CancelarPedido as "Cancelar Pedido de Aluguel"
+usecase AvaliarPedido as "Avaliar Pedido de Aluguel"
+usecase ConcederCredito as "Conceder Crédito"
+usecase ModificarContrato as "Modificar Contrato de Aluguel"
+usecase VisualizarPaginas as "Visualizar Páginas Web"
+
+Cliente --> CriarPedido
+Cliente --> ModificarPedido
+Cliente --> ConsultarPedido
+Cliente --> CancelarPedido
+Cliente --> VisualizarPaginas
+
+Agente --> AvaliarPedido
+Agente --> ModificarContrato
+Agente --> VisualizarPaginas
+
+SistemaBancario --> ConcederCredito
+SistemaWeb --> VisualizarPaginas
+
+@enduml
