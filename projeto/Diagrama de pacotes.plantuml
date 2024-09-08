@@ -1,0 +1,51 @@
+@startuml
+
+package "PedidosContratos" {
+    class Pedido
+    class Contrato
+    class Avaliacao
+    class Aluguel
+    Pedido -- Contrato : "relacionado com"
+}
+
+package "Usuarios" {
+    class Cliente
+    class Agente
+    class Empresa
+    class Banco
+    Cliente -- Pedido : "realiza"
+    Agente -- Avaliacao : "avalia"
+}
+
+package "Automoveis" {
+    class Automovel
+    class Marca
+    class Modelo
+    Pedido -- Automovel : "inclui"
+}
+
+package "Financiamento" {
+    class ContratoCredito
+    class Banco
+    Contrato -- ContratoCredito : "pode incluir"
+    ContratoCredito -- Banco : "concedido por"
+}
+
+package "InterfaceWeb" {
+    class PaginaInicial
+    class FormularioPedido
+    class FormularioAvaliacao
+    class PedidoController
+    class ContratoController
+    FormularioPedido -- PedidoController
+    FormularioAvaliacao -- ContratoController
+}
+
+package "Seguranca" {
+    class Autenticacao
+    class Usuario
+    class Permissao
+    Usuario -- Pedido : "realiza"
+}
+
+@enduml
