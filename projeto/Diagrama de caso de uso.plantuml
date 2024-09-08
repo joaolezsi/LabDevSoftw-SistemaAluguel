@@ -6,6 +6,7 @@ actor Agente
 actor SistemaBancario as "Sistema Bancário"
 actor SistemaWeb as "Sistema Web"
 
+usecase CadastrarUsuario as "Cadastrar Usuário"
 usecase CriarPedido as "Criar Pedido de Aluguel"
 usecase ModificarPedido as "Modificar Pedido de Aluguel"
 usecase ConsultarPedido as "Consultar Pedido de Aluguel"
@@ -14,7 +15,10 @@ usecase AvaliarPedido as "Avaliar Pedido de Aluguel"
 usecase ConcederCredito as "Conceder Crédito"
 usecase ModificarContrato as "Modificar Contrato de Aluguel"
 usecase VisualizarPaginas as "Visualizar Páginas Web"
+usecase ExecutarContrato as "Executar Contrato de Aluguel"
+usecase ModificarPedidoAgente as "Modificar Pedido de Aluguel (Agente)"
 
+Cliente --> CadastrarUsuario
 Cliente --> CriarPedido
 Cliente --> ModificarPedido
 Cliente --> ConsultarPedido
@@ -22,7 +26,9 @@ Cliente --> CancelarPedido
 Cliente --> VisualizarPaginas
 
 Agente --> AvaliarPedido
+Agente --> ModificarPedidoAgente
 Agente --> ModificarContrato
+Agente --> ExecutarContrato
 Agente --> VisualizarPaginas
 
 SistemaBancario --> ConcederCredito
