@@ -1,51 +1,104 @@
 @startuml
 
-package "PedidosContratos" {
-    class Pedido
-    class Contrato
-    class Avaliacao
-    class Aluguel
-    Pedido -- Contrato : "relacionado com"
-}
-
-package "Usuarios" {
+package "Model" {
+    class Usuario {
+        +RG: String
+        +CPF: String
+        +nome: String
+        +endereco: String
+        +profissao: String
+    }
     class Cliente
     class Agente
-    class Empresa
-    class Banco
-    Cliente -- Pedido : "realiza"
-    Agente -- Avaliacao : "avalia"
-}
-
-package "Automoveis" {
+    class Pedido
     class Automovel
-    class Marca
-    class Modelo
-    Pedido -- Automovel : "inclui"
-}
-
-package "Financiamento" {
+    class Contrato
     class ContratoCredito
-    class Banco
-    Contrato -- ContratoCredito : "pode incluir"
-    ContratoCredito -- Banco : "concedido por"
+    class Empregador
+
+    Usuario <|-- Cliente
+    Usuario <|-- Agente
+    Cliente "1" -- "0..*" Pedido
+    Pedido "1" -- "1" Contrato
+    Contrato <|-- ContratoCredito
+    Contrato "1" -- "1" Automovel
+    Cliente "1" -- "0..3" Empregador
+    Agente "0..*" -- "0..*" Pedido
 }
 
-package "InterfaceWeb" {
-    class PaginaInicial
-    class FormularioPedido
-    class FormularioAvaliacao
-    class PedidoController
+package "Repository" {
+    interface ClienteRepository
+    interface AgenteRepository
+    interface PedidoRepository
+    interface AutomovelRepository
+    interface ContratoRepository
+    interface ContratoCreditoRepository
+    interface EmpregadorRepository
+
+    ClienteRepository ..> Cliente : "acessa"
+    AgenteRepository ..> Agente : "acessa"
+    PedidoRepository ..> Pedido : "acessa"
+    AutomovelRepository ..> Automovel : "acessa"
+    ContratoRepository ..> Contrato : "acessa"
+    ContratoCreditoRepository ..> ContratoCredito : "acessa"
+    EmpregadorRepository ..> Empregador : "acessa"
+}
+
+package "Service" {
+    class ClienteService {
+        +consultarPedidos()
+        +modificarPedidos()
+        +cancelarPedidos()
+    }
+    class AgenteService {
+        +avaliarPedidos()
+        +modificarPedidos()
+    }
+    class PedidoService {
+        +analisarPedido()
+        +confirmarPedido()
+        +cancelarPedido()
+    }
+    class AutomovelService
+    class ContratoService
+    class ContratoCreditoService
+    class EmpregadorService
+
+    ClienteService ..> ClienteRepository
+    AgenteService ..> AgenteRepository
+    PedidoService ..> PedidoRepository
+    AutomovelService ..> AutomovelRepository
+    ContratoService ..> ContratoRepository
+    ContratoCreditoService ..> ContratoCreditoRepository
+    EmpregadorService ..> EmpregadorRepository
+}
+
+package "Controller" {
+    class PedidoController {
+        +realizarPedido()
+        +consultarPedido()
+        +cancelarPedido()
+    }
+    class ClienteController {
+        +cadastrarCliente()
+        +consultarCliente()
+        +modificarCliente()
+        +removerCliente()
+    }
+    class AgenteController {
+        +avaliarPedido()
+        +modificarPedido()
+    }
+    class AutomovelController
     class ContratoController
-    FormularioPedido -- PedidoController
-    FormularioAvaliacao -- ContratoController
-}
+    class ContratoCreditoController
 
-package "Seguranca" {
-    class Autenticacao
-    class Usuario
-    class Permissao
-    Usuario -- Pedido : "realiza"
+    PedidoController ..> PedidoService
+    ClienteController ..> ClienteService
+    AgenteController ..> AgenteService
+    AutomovelController ..> AutomovelService
+    ContratoController ..> ContratoService
+    ContratoCreditoController ..> ContratoCreditoService
 }
 
 @enduml
