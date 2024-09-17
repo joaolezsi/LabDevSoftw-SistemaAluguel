@@ -41,7 +41,7 @@ CREATE TABLE Automovel (
     ano INT NOT NULL,
     marca VARCHAR(50) NOT NULL,
     modelo VARCHAR(50) NOT NULL,
-    placa VARCHAR(7) NOT NULL
+    placa VARCHAR(8) NOT NULL
 );
 
 -- Tabela de Pedidos de Aluguel
@@ -121,7 +121,7 @@ INSERT INTO Cliente_Empregador (cliente_id, empregador_id, salario) VALUES
 INSERT INTO Automovel (matricula, ano, marca, modelo, placa) VALUES
 ('ABC1234', 2020, 'Toyota', 'Corolla', 'ABC-1234'),
 ('XYZ5678', 2021, 'Honda', 'Civic', 'XYZ-5678'),
-('LMN9876', 2022, 'Ford', 'Fiesta', 'LMN-9876');
+('LMN9876', 2022, 'Ford', 'Fiesta', 'LMN-9876');    
 
 -- Inserindo pedidos de aluguel
 INSERT INTO Pedido (cliente_id, agente_id, automovel_id, data_pedido, status) VALUES
