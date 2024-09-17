@@ -32,6 +32,5 @@ Agente --> ExecutarContrato
 Agente --> VisualizarPaginas
 
 SistemaBancario --> ConcederCredito
-SistemaWeb --> VisualizarPaginas
 
 @enduml
