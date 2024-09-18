@@ -1,0 +1,56 @@
+@startuml
+component "Interface Web" as interfaceWeb {
+    [Página Inicial]
+    [Formulario de Pedido]
+    [Formulario de Avaliação]
+    [Painel de Contratos]
+}
+
+component "Serviço de Usuário" as servicoUsuario {
+    [Cadastrar Usuário]
+    [Autenticar Usuário]
+}
+
+component "Serviço de Pedidos" as servicoPedidos {
+    [Criar Pedido de Aluguel]
+    [Modificar Pedido]
+    [Consultar Pedido]
+    [Cancelar Pedido]
+}
+
+component "Serviço de Avaliação" as servicoAvaliacao {
+    [Avaliar Pedido]
+    [Registrar Avaliação]
+}
+
+component "Serviço de Contrato" as servicoContrato {
+    [Gerar Contrato]
+    [Executar Contrato]
+}
+
+component "Serviço de Crédito Bancário" as servicoCredito {
+    [Verificar Crédito]
+    [Aprovar Crédito]
+}
+
+database "Banco de Dados" as db {
+    [Usuários]
+    [Pedidos]
+    [Automóveis]
+    [Contratos]
+}
+
+interfaceWeb --> servicoUsuario : "Autenticação / Cadastro"
+interfaceWeb --> servicoPedidos : "Gerenciamento de Pedidos"
+interfaceWeb --> servicoAvaliacao : "Avaliação de Pedidos"
+interfaceWeb --> servicoContrato : "Visualizar Contratos"
+
+servicoPedidos --> db : "CRUD de Pedidos"
+servicoContrato --> db : "CRUD de Contratos"
+servicoUsuario --> db : "Gerenciamento de Usuários"
+
+servicoAvaliacao --> servicoCredito : "Solicitar Avaliação de Crédito"
+servicoCredito --> db : "Verificar Informação Financeira"
+
+servicoContrato --> servicoCredito : "Verificar Crédito para Aprovação"
+@enduml
