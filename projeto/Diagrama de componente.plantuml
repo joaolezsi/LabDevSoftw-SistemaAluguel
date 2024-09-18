@@ -1,4 +1,5 @@
 @startuml
+
 component "Interface Web" as interfaceWeb {
     [Página Inicial]
     [Formulario de Pedido]
