@@ -1,0 +1,18 @@
+@startuml
+
+package "Backend" {
+    [Spring Boot]
+    [Controller] --> [Service] : "Chama"
+    [Service] --> [Repository] : "Consulta/Salva"
+    [Repository] --> [MySQL] : "Executa SQL"
+    [Swagger UI] --> [Controller] : "Documenta API"
+}
+
+package "Database" {
+    [MySQL]
+}
+
+[Swagger UI] --> [Spring Boot] : "Chama API REST"
+[Spring Boot] --> [MySQL] : "Persistência"
+
+@enduml
